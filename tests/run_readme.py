@@ -71,6 +71,19 @@ def test_simple_typing():
     my_super_serious_func()
 
 
+def test_no_prompt():
+    from prompt_args import Prompt
+
+    print("Test no prompting for some arguments")
+    @Prompt.decorate(status=Prompt.no_prompt)
+    def my_func(first_name: str, last_name: str = "", status: str = "well"):
+        print(f"Hello, {first_name} {last_name}, I am {status}")
+
+    # Status should not be prompted
+    my_func()
+
+
 if __name__ == "__main__":
-    test_readme_basic()
+    # test_readme_basic()
     # test_simple_typing()
+    test_no_prompt()

@@ -7,6 +7,8 @@ from typing import Any, Callable, Optional
 class Prompt:
     converters = {}
 
+    no_prompt = None
+
     @classmethod
     def register_type_converter(cls, type_annotation, converter, prompt_help=None):
         cls.converters[type_annotation] = (converter, prompt_help)
@@ -89,6 +91,8 @@ class Prompt:
             # Get or create new Prompt
             try:
                 prompt = prompts[name]
+                if prompt is None:
+                    continue
             except KeyError:
                 prompt = prompts[name] = cls()
 
@@ -118,7 +122,7 @@ class Prompt:
 
             # Get input for all arguments not given
             for name, prompt in prompts.items():
-                if name not in kwargs:
+                if name not in kwargs and prompt:
                     value = input(prompt.get_prompt()).strip()
                     if callable(prompt.converter):
                         value = prompt.converter(value)

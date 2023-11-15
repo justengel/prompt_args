@@ -56,7 +56,7 @@ Usage
 
 Output
 
-.. code-block:: shell
+.. code-block:: text
 
     Test automatic prompting
     Enter First Name: John
@@ -112,7 +112,7 @@ Register prompt helpers ("Enter ... [{prompt_help}]: ").
 
 Output:
 
-.. code-block:: shell
+.. code-block:: text
 
     Testing builtin type converter
     Enter X: 10
@@ -129,3 +129,27 @@ Output:
     Enter X: 25
     Enter Confirm [Yes I am sure/no]: Yes I am sure
     Change x to 25? True
+
+
+Do not prompt for some arguments
+
+.. code-block:: python
+
+    from prompt_args import Prompt
+
+    print("Test no prompting for some arguments")
+    @Prompt.decorate(status=Prompt.no_prompt)
+    def my_func(first_name: str, last_name: str = "", status: str = "well"):
+        print(f"Hello, {first_name} {last_name}, I am {status}")
+
+    # Status should not be prompted
+    my_func()
+
+Output
+
+.. code-block:: text
+
+    Test no prompting for some arguments
+    Enter First Name: John
+    Enter Last Name ['']: Doe
+    Hello, John Doe, I am well
