@@ -137,8 +137,11 @@ class Prompt:
 
 
 def is_yes(value):
-    v = str(value)[0].lower()
-    return v in ["y", '1']
+    try:
+        v = str(value)[0].lower()
+        return v == "y"
+    except IndexError:
+        return False
 
 
 Prompt.register_type_converter(bool, is_yes, prompt_help="Y/n")
