@@ -21,7 +21,7 @@ def read(fname):
 if __name__ == "__main__":
     # Variables
     name = "prompt_args"
-    version = "1.0.0"
+    version = "1.0.1"
     description = "Decorator to prompt input for missing arguments."
     url = f"https://github.com/justengel/{name}"
     author = "Justin Engel"
